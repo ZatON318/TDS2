@@ -1,0 +1,13 @@
+LICENSE
+README.md
+setup.py
+TDS2.egg-info/PKG-INFO
+TDS2.egg-info/SOURCES.txt
+TDS2.egg-info/dependency_links.txt
+TDS2.egg-info/top_level.txt
+tds2/__init__.py
+tds2/tds2.py
+tds2.egg-info/PKG-INFO
+tds2.egg-info/SOURCES.txt
+tds2.egg-info/dependency_links.txt
+tds2.egg-info/top_level.txt

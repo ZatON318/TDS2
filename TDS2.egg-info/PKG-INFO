@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: tds2
+Version: 0.1.0
+Summary: lib for file management with telegram api
+Home-page: https://github.com/ZatON318/TDS2
+Author: ZatOFF
+Author-email: zaton@mntk.sk
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# TDS2
+TDS2 - Telegram Data Storage System. Is python library that use telegram api to manage files in your channels. This system can be also used theoreticaly as infinity encrypted cloud storage...
