@@ -2,20 +2,15 @@ from telethon import TelegramClient
 from tqdm import tqdm
 import os
 import asyncio
-from dotenv import load_dotenv
 
 class tds2client:
 
     bandwidth_safety = False
 
-    def __init__(self):
-        load_dotenv()
+    def __init__(self, api_id, api_hash, group_chat_id):
 
-        api_id = os.environ.get("API_ID")
-        api_hash = os.environ.get("API_HASH")
-
-        self.client = TelegramClient('anon', api_id, api_hash)
-        self.safe = int(os.environ.get("GROUP_CHAT_ID"))
+        self.client = TelegramClient('anon', int(api_id), api_hash)
+        self.safe = int(group_chat_id)
 
     async def upload_file(self, file_path):
         await self.client.start()
@@ -28,7 +23,6 @@ class tds2client:
                 bar.update(current - bar.n)
 
             response = await self.client.send_file(self.safe, file_path, progress_callback=callback)
-            print(response)
         
         await self.client.disconnect()
         return response
