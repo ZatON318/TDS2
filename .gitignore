@@ -6,3 +6,4 @@ test_tds2.py
 pypi
 dist/
 build/
+test_upload_multiple.py

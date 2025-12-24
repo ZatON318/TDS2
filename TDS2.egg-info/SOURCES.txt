@@ -10,4 +10,5 @@ tds2/tds2.py
 tds2.egg-info/PKG-INFO
 tds2.egg-info/SOURCES.txt
 tds2.egg-info/dependency_links.txt
+tds2.egg-info/requires.txt
 tds2.egg-info/top_level.txt

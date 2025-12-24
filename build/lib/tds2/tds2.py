@@ -11,9 +11,14 @@ class tds2client:
 
     def __init__(self, api_id, api_hash, group_chat_id, logfile=None):
 
-        self.client = TelegramClient('anon', int(api_id), api_hash)
+        self.api_id = int(api_id)
+        self.api_hash = api_hash
         self.safe = int(group_chat_id)
         self.logfile = logfile
+
+    def _get_client(self):
+        """Create a new Telegram client instance"""
+        return TelegramClient('anon', self.api_id, self.api_hash)
 
     def _load_log(self):
         """Load the JSON log file"""
@@ -96,7 +101,8 @@ class tds2client:
         }
 
     async def upload_file(self, file_path):
-        await self.client.start()
+        client = self._get_client()
+        await client.start()
         
         total_size = os.path.getsize(file_path)
         response = None
@@ -105,55 +111,78 @@ class tds2client:
             def callback(current, total):
                 bar.update(current - bar.n)
 
-            response = await self.client.send_file(self.safe, file_path, progress_callback=callback)
+            response = await client.send_file(self.safe, file_path, progress_callback=callback)
         
         # Log the upload
         self._log_upload(response.id, file_path)
         
-        await self.client.disconnect()
+        await client.disconnect()
         return response
     
     async def download_file(self, message_id):
-        await self.client.start()
+        client = self._get_client()
+        await client.start()
 
-        message = await self.client.get_messages(self.safe, ids=message_id)
+        message = await client.get_messages(self.safe, ids=message_id)
        
         if message.media:
-            response = await self.client.download_media(message.media)
+            response = await client.download_media(message.media)
 
-        await self.client.disconnect()
+        await client.disconnect()
         return response
     
     async def get_last_massage_id(self):
-        await self.client.start()
+        client = self._get_client()
+        await client.start()
 
-        message = await self.client.get_messages(self.safe, limit=1)
+        message = await client.get_messages(self.safe, limit=1)
         last_message_id = message[0].id if message else None
         
-        await self.client.disconnect()
+        await client.disconnect()
         return last_message_id
     
     async def delete_message(self, message_id):
-        await self.client.start()
+        client = self._get_client()
+        await client.start()
 
-        response = await self.client.delete_messages(self.safe, message_id)
+        response = await client.delete_messages(self.safe, message_id)
         print(f'Message {message_id} deleted')
         
         # Log the deletion
         self._log_deletion(message_id)
 
-        await self.client.disconnect()
+        await client.disconnect()
         return response
     
     #Primary functions
     def upload(self, file_path):
-        return asyncio.run(self.upload_file(file_path))
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            return loop.run_until_complete(self.upload_file(file_path))
+        finally:
+            loop.close()
 
     def download(self, message_id):
-        return asyncio.run(self.download_file(message_id))
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            return loop.run_until_complete(self.download_file(message_id))
+        finally:
+            loop.close()
 
     def delete(self, message_id):
-        return asyncio.run(self.delete_message(message_id))
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            return loop.run_until_complete(self.delete_message(message_id))
+        finally:
+            loop.close()
 
     def get_last(self):
-        return asyncio.run(self.get_last_massage_id())
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            return loop.run_until_complete(self.get_last_massage_id())
+        finally:
+            loop.close()

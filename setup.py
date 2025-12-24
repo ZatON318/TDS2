@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
     name="tds2",
-    version="0.2.0",
+    version="0.2.2",
     author="ZatOFF",
     author_email="zaton318@gmail.com",
     description="lib for file management with telegram api",
