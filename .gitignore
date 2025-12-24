@@ -2,3 +2,7 @@ test.py
 .env
 test.txt
 anon.session
+test_tds2.py
+pypi
+dist/
+build/
