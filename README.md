@@ -1,6 +1,6 @@
-# � TDS2 - Telegram Data Storage v2
+# 📡 TDS2 - Telegram Data Storage System
 
-**TDS2** (Telegram Data Storage System v2) is a powerful Python library that leverages Telegram's infrastructure as a cloud storage backend. Upload, download, manage, and track files using Telegram channels with automatic logging and progress tracking.
+**TDS2** (Telegram Data Storage System) is a powerful Python library that leverages Telegram's infrastructure as a cloud storage backend. Upload, download, manage, and track files using Telegram channels with automatic logging and progress tracking.
 
 ## 🌟 Features
 
