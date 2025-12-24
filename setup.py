@@ -13,6 +13,11 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/ZatON318/TDS2",
     packages=find_packages(),
+    install_requires=[
+        'telethon',
+        'tqdm',
+        'python-dotenv',
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
